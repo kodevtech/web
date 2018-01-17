@@ -1,0 +1,3 @@
+Step 1/15 : FROM node:8.9.3
+ ---> 2eeae8debf3d
+Step 2/15 : COPY package.json ./

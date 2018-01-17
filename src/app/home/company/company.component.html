@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="offset-sm-1 col-lg-10">
+    <div class="card">
+      <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button> -->
+      <div class="card-body">
+        <button class="btn-success btn btn-circle btn-sm pull-right m-l-10 m-b-10" (click)="open(content)" *ngIf="role == 'Super'"><i class="ti-plus text-white" ></i></button>
+
+        <div class="table-responsive">
+
+          <table class="table"  [hidden]="!companies.length">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Limit</th>
+                <th>Manage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let comp of companies; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{comp.companyName}}</td>
+                <td>{{comp.city}}</td>
+                <td>{{comp.limit}}</td>
+                <td>
+                  <span [routerLink]="['/company/'+comp.id]" class="label btn btn-info waves-effect waves-light" *ngIf="role !== 'Low' && role !== 'None'">Edit</span>
+                  <span [routerLink]="['/users/'+comp.id]" class="label  btn btn-success waves-effect waves-light">Users</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <ngb-alert [dismissible]="false" [hidden]="companies.length" class="text-center">
+            <strong>No company found </strong>
+          </ngb-alert>
+
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Create Company</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+				      <span aria-hidden="true">&times;</span>
+				    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal" id="updateCompanyForm" novalidate (ngSubmit)="onCreate()">
+      <div class="form-group row">
+        <label for="input1" class="col-sm-2 text-right control-label col-form-label" >Name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="input1" placeholder="Name" name="companyName" [(ngModel)]="company.companyName">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="input2" class="col-sm-2 text-right control-label col-form-label">City</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="input2" placeholder="City" name="city" [(ngModel)]="company.city">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="input3" class="col-sm-2 text-right control-label col-form-label">Limit</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="input3" placeholder="200" placeholder="limit" name="limit" [(ngModel)]="company.limit" [readonly]="role !== 'Super'">
+        </div>
+      </div>
+
+      <div class="form-group m-b-0">
+        <div class="offset-sm-2 col-sm-10">
+          <button type="submit" class="btn btn-info waves-effect waves-light m-t-10 m-r-20">Create</button>
+          <button type="button" class="btn btn-secondary waves-effect waves-light m-t-10" (click)="c('Close click')">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</ng-template>

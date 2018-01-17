@@ -1,0 +1,76 @@
+<aside class="left-sidebar">
+  <!-- Sidebar scroll-->
+  <div class="scroll-sidebar">
+    <!-- User profile -->
+    <div class="user-profile" style="background: url(assets/images/background/user-info.jpg) no-repeat;">
+      <!-- User profile image -->
+      <div class="profile-img">
+        <img [src]="info.imagePath" alt="user" *ngIf="info.imagePath" />
+        <img class="round" src="{{info.displayName}}" avatar alt="user" style="width:100%; height: 50px;" *ngIf="!info.imagePath" />
+      </div>
+      <!-- User profile text-->
+      <div class="profile-text"><a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">{{info.displayName}}<span class="caret"></span></a>
+        <div class="dropdown-menu animated flipInY">
+          <a routerLink="/profile" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+          <!--<a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>-->
+          <!--<a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>-->
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-divider"></div>
+          <a href="#" (click)="logoutUser()" class="dropdown-item">
+            <i class="fa fa-power-off"></i>
+            Logout
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- End User profile text-->
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav">
+      <ul id="sidebarnav">
+
+        <li class="nav-small-cap">NAVIGATION</li>
+
+        <li [class.active]="showMenu === 'start'">
+          <a routerLink="/dashboard" (click)="addExpandClass('start')" [routerLinkActive]="['router-link-active']"><i
+            class="mdi mdi-gauge"></i><span class="hide-menu">Home</span></a>
+        </li>
+
+        <li [class.active]="showMenu === 'company'" *ngIf="role=='Super'">
+          <a routerLink="/company" (click)="addExpandClass('company')" [routerLinkActive]="['router-link-active']"><i
+            class="mdi mdi-gauge"></i><span class="hide-menu">Companies</span></a>
+        </li>
+
+        <li [class.active]="showMenu === 'admin'" *ngIf="role!='Super'">
+          <a routerLink="/company" (click)="addExpandClass('company')" [routerLinkActive]="['router-link-active']"><i
+            class="mdi mdi-gauge"></i><span class="hide-menu">Manage</span></a>
+        </li>
+
+        <!-- <li [class.active]="showMenu === 'user'" *ngIf="role=='Super'">
+          <a routerLink="/user" (click)="addExpandClass('user')" [routerLinkActive]="['router-link-active']"><i
+            class="mdi mdi-gauge"></i><span class="hide-menu">Users</span></a>
+        </li> -->
+
+        <li [class.active]="showMenu === 'permission'" *ngIf="role=='Super'">
+          <a routerLink="/permission" (click)="addExpandClass('permission')" [routerLinkActive]="['router-link-active']"><i
+            class="mdi mdi-gauge"></i><span class="hide-menu">Permissions</span></a>
+        </li>
+
+      </ul>
+    </nav>
+    <!-- End Sidebar navigation -->
+  </div>
+  <!-- End Sidebar scroll-->
+  <!-- Bottom points-->
+  <div class="sidebar-footer">
+    <!-- item-->
+    <a href="" class="link" data-toggle="tooltip" title=""></a>
+    <!-- item-->
+    <a href="#" (click)="logoutUser()" class="link" data-toggle="tooltip" title="Logout"><i
+      class="mdi mdi-power"></i></a>
+
+    <a href="" class="link" data-toggle="tooltip" title=""></a>
+    <!-- item-->
+
+  </div>
+  <!-- End Bottom points-->
+</aside>
